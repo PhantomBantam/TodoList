@@ -6,18 +6,18 @@ const router = express.Router();
 router.get('/', async (req, res)=>{
   try{
     let data = await ToDo.find();
-    res.json(data);
+    res.status(201).json(data);
   }catch(err){
-    res.json(err);
+    res.status(500).json(err);
   }
 });
-
+ 
 router.get('/:toDoTitle', async (req, res)=>{
   try{
     let data = await ToDo.findOne({title:req.params.toDoTitle});
-    res.json(data);
+    res.status(201).json(data);
   }catch(err){
-    res.json(err);
+    res.status(500).json(err);
   }
 });
 
@@ -32,9 +32,9 @@ router.post('/', async (req, res)=>{
     });
 
     let data = await newToDo.save();
-    res.json(data);
+    res.status(201).json(data);
   }catch(err){
-    res.json(err);
+    res.status(500).json(err);
   }
 });
 
@@ -47,18 +47,18 @@ router.patch('/:toDoTitle', async (req, res)=>{
       finished: req.body.finished
     });
 
-    res.json(data);
+    res.status(201).json(data);
   }catch(err){
-    res.json(err);
+    res.status(500).json(err);
   }
 });
 
 router.delete('/:toDoTitle', async (req, res)=>{
   try{
     let data = await ToDo.remove({title:req.params.toDoTitle});
-    res.json(data);
+    res.status(201).json(data);
   }catch(err){
-    res.json(err);
+    res.status(500).json(err);
   }
 });
 
