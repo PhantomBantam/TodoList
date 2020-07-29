@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const cors = require('cors');
 require('dotenv/config');
 
@@ -19,5 +20,7 @@ app.use(cors());
 const toDosRouter = require('./api/routes/toDos');
 
 app.use('/todos', toDosRouter);
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT, ()=>{console.log('SERVER RUNNING AT PORT: ' + PORT)});

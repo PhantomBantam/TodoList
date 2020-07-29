@@ -24,6 +24,11 @@ router.get('/:toDoTitle', async (req, res)=>{
 router.post('/', async (req, res)=>{
   try{
 
+    //check data for discrepencies
+    if(req.body.title == '' || req.body.description == '' ||req.body.date == '' || req.body.finished == ''){
+      return res.send("FORM INCOMPLETE");
+    }
+
     let newToDo = new ToDo({
       title: req.body.title,
       date: req.body.date,
@@ -31,6 +36,10 @@ router.post('/', async (req, res)=>{
       finished: req.body.finished
     });
 
+    console.log(req.body.finished);
+
+    console.log(newToDo);
+ 
     let data = await newToDo.save();
     res.status(201).json(data);
   }catch(err){
