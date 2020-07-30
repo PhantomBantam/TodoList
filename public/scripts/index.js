@@ -1,14 +1,7 @@
 const form = document.getElementById('todo-form')
-const getBtn = document.getElementById('get-btn');
 const todosDis = document.getElementById('todos-display');
 
-getBtn.addEventListener('click', (e)=>{
-  $.get("/toDos", (data, status)=>{
-    data.forEach(element => {
-      console.log(element);
-    });
-  })
-});
+getItems();
 
 form.addEventListener('submit', (e)=>{
   let title = form.getElementsByTagName('input')[0].value;
@@ -22,6 +15,33 @@ form.addEventListener('submit', (e)=>{
     description,description,
     finished:finished
   }, (data, status)=>{
-  console.log(data);
+    getItems();
   });
 });
+
+function getItems(){
+  $.get("/toDos", (data, status)=>{
+      
+    todosDis.innerHTML = '';
+
+  data.forEach(element => {
+    let li = document.createElement('li');
+
+    let title = document.createElement('h4');
+    let date = document.createElement('h4');
+    let desc = document.createElement('h4');
+    let finished = document.createElement('h4');
+
+    title.innerHTML = "Title: " + element.title;
+    date.innerHTML = "Date: " + element.date;
+    desc.innerHTML = "Description: " + element.description;
+    finished.innerHTML = "finished: " + element.finished;
+
+    li.appendChild(title);
+    li.appendChild(date);
+    li.appendChild(desc);
+    li.appendChild(finished);
+    todosDis.appendChild(li);
+  });
+  });
+}
