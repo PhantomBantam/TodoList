@@ -47,9 +47,14 @@ router.post('/', async (req, res)=>{
   }
 });
 
-router.patch('/:toDoTitle', async (req, res)=>{
+router.patch('/', async (req, res)=>{
   try{
-    let data = await ToDo.update({title:req.params.toDoTitle}, {
+
+    if(req.body.title == '' || req.body.description == '' ||req.body.date == '' || req.body.finished == ''){
+      return res.send("FORM INCOMPLETE");
+    }
+
+    let data = await ToDo.updateOne({title:req.body.title}, {
       title: req.body.title,
       date: req.body.date,
       description: req.body.description,
@@ -62,9 +67,9 @@ router.patch('/:toDoTitle', async (req, res)=>{
   }
 });
 
-router.delete('/:toDoTitle', async (req, res)=>{
+router.delete('/', async (req, res)=>{
   try{
-    let data = await ToDo.remove({title:req.params.toDoTitle});
+    let data = await ToDo.remove({title:req.body.title});
     res.status(201).json(data);
   }catch(err){
     res.status(500).json(err);

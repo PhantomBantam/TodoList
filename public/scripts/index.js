@@ -15,38 +15,59 @@ createForm.addEventListener('submit', (e)=>{
     title:title,
     date:date,
     description,description,
-    finished:finished
+    finished:finished,
   }, (data, status)=>{
     getItems();
   });
 });
 
 updateForm.addEventListener('submit', (e)=>{
-  let title = createForm.getElementsByTagName('input')[0].value;
-  let date = createForm.getElementsByTagName('input')[1].value;
-  let description = createForm.getElementsByTagName('input')[2].value;
-  let finished = createForm.getElementsByTagName('input')[3].value;
+  let title = updateForm.getElementsByTagName('input')[0].value;
+  let date = updateForm.getElementsByTagName('input')[1].value;
+  let description = updateForm.getElementsByTagName('input')[2].value;
+  let finished = updateForm.getElementsByTagName('input')[3].value;
 
-  $.patch("/toDos", {
-    title:title,
-    date:date,
-    description,description,
-    finished:finished
-  }, (data, status)=>{
-    getItems();
+  $.ajax({
+    url : "/toDos",
+    type : 'PATCH',
+    data :  {
+      title:title,
+      date:date,
+      description,description,
+      finished:finished,
+    },
+    success : function(response, textStatus, jqXhr) {
+        console.log("Successfully Patched!");
+    },
+    error : function(jqXHR, textStatus, errorThrown) {
+        // log the error to the console
+        console.log("The following error occured: " + textStatus, errorThrown);
+    },
+    complete : function() {
+        console.log("Patch Ran");
+    }
   });
 });
 
 deleteForm.addEventListener('submit', (e)=>{
-  let title = createForm.getElementsByTagName('input')[0].value;
+  let title = deleteForm.getElementsByTagName('input')[0].value;
 
-  $.post("/toDos", {
-    title:title,
-    date:date,
-    description,description,
-    finished:finished
-  }, (data, status)=>{
-    getItems();
+  $.ajax({
+    url : "/toDos",
+    type : 'DELETE',
+    data :  {
+      title:title,
+    },
+    success : function(response, textStatus, jqXhr) {
+        console.log("Successfully Deleted!");
+    },
+    error : function(jqXHR, textStatus, errorThrown) {
+        // log the error to the console
+        console.log("The following error occured: " + textStatus, errorThrown);
+    },
+    complete : function() {
+        console.log("Deleted Ran");
+    }
   });
 });
 
