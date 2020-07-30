@@ -1,6 +1,28 @@
 
-
 li{
+  margin-top: 60px;
+}
 
-  margin-bottom: 60px;
+h4{
+  margin-bottom: 1px;
+  padding: 0px;
+}
+
+input{
+  display: block;
+  margin-top: 15px;
+}
+
+form{
+  margin-left: 10%;
+  float: left;
+  width: 20%;
+}
+
+button{
+  margin-top: 30px;
+}
+
+#form-wrapper{
+  width: 100%;
 }

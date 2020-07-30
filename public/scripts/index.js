@@ -1,13 +1,15 @@
-const form = document.getElementById('todo-form')
+const createForm = document.getElementById('create-form');
+const updateForm = document.getElementById('update-form');
+const deleteForm = document.getElementById('delete-form');
 const todosDis = document.getElementById('todos-display');
 
 getItems();
 
-form.addEventListener('submit', (e)=>{
-  let title = form.getElementsByTagName('input')[0].value;
-  let date = form.getElementsByTagName('input')[1].value;
-  let description = form.getElementsByTagName('input')[2].value;
-  let finished = form.getElementsByTagName('input')[3].value;
+createForm.addEventListener('submit', (e)=>{
+  let title = createForm.getElementsByTagName('input')[0].value;
+  let date = createForm.getElementsByTagName('input')[1].value;
+  let description = createForm.getElementsByTagName('input')[2].value;
+  let finished = createForm.getElementsByTagName('input')[3].value;
 
   $.post("/toDos", {
     title:title,
@@ -18,6 +20,36 @@ form.addEventListener('submit', (e)=>{
     getItems();
   });
 });
+
+updateForm.addEventListener('submit', (e)=>{
+  let title = createForm.getElementsByTagName('input')[0].value;
+  let date = createForm.getElementsByTagName('input')[1].value;
+  let description = createForm.getElementsByTagName('input')[2].value;
+  let finished = createForm.getElementsByTagName('input')[3].value;
+
+  $.patch("/toDos", {
+    title:title,
+    date:date,
+    description,description,
+    finished:finished
+  }, (data, status)=>{
+    getItems();
+  });
+});
+
+deleteForm.addEventListener('submit', (e)=>{
+  let title = createForm.getElementsByTagName('input')[0].value;
+
+  $.post("/toDos", {
+    title:title,
+    date:date,
+    description,description,
+    finished:finished
+  }, (data, status)=>{
+    getItems();
+  });
+});
+
 
 function getItems(){
   $.get("/toDos", (data, status)=>{
@@ -35,7 +67,7 @@ function getItems(){
     title.innerHTML = "Title: " + element.title;
     date.innerHTML = "Date: " + element.date;
     desc.innerHTML = "Description: " + element.description;
-    finished.innerHTML = "finished: " + element.finished;
+    finished.innerHTML = "Finished: " + element.finished;
 
     li.appendChild(title);
     li.appendChild(date);

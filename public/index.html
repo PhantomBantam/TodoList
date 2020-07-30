@@ -4,24 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Recursive&display=swap" rel="stylesheet">
     <title>Document</title>
   </head>
 
   
-  <body>
-    <h1>HI</h1>
+  <body style="font-family: 'Recursive', sans-serif">
+    <h1>To Do App</h1>
   
+    <div id="form-wrapper">
+      <form id="create-form" style="margin-bottom: 40px;">
+        <label>Create new to do item</label>
+        <input type="text" placeholder="title">
+        <input type="text" placeholder="date">
+        <input type="text" placeholder="description">
+        <input type="text" placeholder="finished?">
+  
+        <button type="submit">Post</button>
+      </form>
+  
+      <form id="update-form" style="margin-bottom: 40px;">
+        <label>Update a to do item</label>
+        <input type="text" placeholder="Title/number of todo to update" required>
+        <input type="text" placeholder="date">
+        <input type="text" placeholder="description">
+        <input type="text" placeholder="finished?">
+        <button type="submit">Update To Do</button>
+      </form>
+  
+      <form id="delete-form" style="margin-bottom: 40px;">
+        <label>Delete a to do item</label>
+        <input type="text" placeholder="Title/number of todo to delete" required>
+        <button type="submit">Delete</button>
+      </form>  
+    </div>  
 
-    <form id="todo-form" style="margin-bottom: 40px;">
-      <input type="text" placeholder="title">
-      <input type="text" placeholder="date">
-      <input type="text" placeholder="description">
-      <input type="text" placeholder="finished?">
 
-      <button type="submit">Post</button>
-    </form>
-
-    <ol id="todos-display" style="margin-left: 100px;"></ol>
+    <ol id="todos-display" style="margin-left: 100px; margin-top: 290px;"></ol>
 
   </body>
 
